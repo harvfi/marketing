@@ -4,6 +4,7 @@ import authService from './services/authService';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
+import AccessHub from './pages/AccessHub';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -53,37 +54,66 @@ function App() {
 
     return (
         <div className="app">
-            <Header user={user} />
-            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route
-                        path="/login"
-                        element={user ? <Navigate to="/dashboard" /> : <Login setUser={setUser} />}
-                    />
-                    <Route
-                        path="/signup"
-                        element={user ? <Navigate to="/dashboard" /> : <Signup setUser={setUser} />}
-                    />
-                    <Route
-                        path="/dashboard"
-                        element={user ? <Dashboard user={user} /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="/leads"
-                        element={user ? <Leads /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="/campaigns"
-                        element={user ? <Campaigns /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="/analytics"
-                        element={user ? <Analytics /> : <Navigate to="/login" />}
-                    />
-                </Routes>
-            </main>
-            <Footer />
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/access-hub" element={<AccessHub />} />
+                <Route
+                    path="/login"
+                    element={user ? <Navigate to="/dashboard" /> : <Login setUser={setUser} />}
+                />
+                <Route
+                    path="/signup"
+                    element={user ? <Navigate to="/dashboard" /> : <Signup setUser={setUser} />}
+                />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <>
+                            <Header user={user} />
+                            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+                                {user ? <Dashboard user={user} /> : <Navigate to="/login" />}
+                            </main>
+                            <Footer />
+                        </>
+                    }
+                />
+                <Route
+                    path="/leads"
+                    element={
+                        <>
+                            <Header user={user} />
+                            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+                                {user ? <Leads /> : <Navigate to="/login" />}
+                            </main>
+                            <Footer />
+                        </>
+                    }
+                />
+                <Route
+                    path="/campaigns"
+                    element={
+                        <>
+                            <Header user={user} />
+                            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+                                {user ? <Campaigns /> : <Navigate to="/login" />}
+                            </main>
+                            <Footer />
+                        </>
+                    }
+                />
+                <Route
+                    path="/analytics"
+                    element={
+                        <>
+                            <Header user={user} />
+                            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+                                {user ? <Analytics /> : <Navigate to="/login" />}
+                            </main>
+                            <Footer />
+                        </>
+                    }
+                />
+            </Routes>
         </div>
     );
 }
